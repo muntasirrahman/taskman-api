@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor client
+participant TaskResource
+participant TaskDAO
+
+autonumber
+
+client -> TaskResource++: GET /tasks
+    TaskResource -> TaskDAO++:getTaskList()
+    return
+return Task[]
+
+client -> TaskResource++: GET /task/{taskId}
+    TaskResource -> TaskDAO++:getTask(taskId)
+    return theTask
+return theTask
+
+client -> TaskResource++: POST /task, BODY {newTask}
+    TaskResource -> TaskDAO++:addNewTask(newTask)
+    return newlyAddedTask
+return newlyAddedTask
+
+client -> TaskResource++: PUT /task/{taskId}, BODY {task}
+    TaskResource -> TaskDAO++:completeTask(taskId)
+    return newlyUpdatedTask
+return newlyUpdatedTask
+
+client -> TaskResource++: DELETE /task/{taskId}
+    TaskResource -> TaskDAO++:deleteTask(taskId)
+    return newlyDeletedTask
+return newlyDeletedTask
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant TaskManagerApp
+participant TaskResource
+participant TaskDAO
+participant DatabaseHealthCheck
+
+autonumber
+TaskManagerApp -> TaskManagerApp++: run()
+    TaskManagerApp -> TaskResource++
+        TaskResource -> TaskDAO++
+        return
+    return
+    TaskManagerApp -> DatabaseHealthCheck++
+    return
+    TaskManagerApp -> TaskManagerApp: createOpenApiConfiguration
+
+@enduml
